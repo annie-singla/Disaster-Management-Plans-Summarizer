@@ -1,11 +1,19 @@
+# requirements.txt:
+# streamlit
+# openai>=1.0.0
+# PyMuPDF
+# tiktoken
+
 import streamlit as st
 import fitz  # PyMuPDF
 import openai
 import os
 import tiktoken
+from openai import OpenAI
 
-# Load API key securely
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# 🔑 Load OpenAI API Key from Streamlit secrets or hardcoded (NOT recommended)
+openai_api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else "YOUR_API_KEY_HERE"
+client = OpenAI(api_key=openai_api_key)
 
 st.title("📄 Disaster Management Plan Summarizer")
 
@@ -45,7 +53,7 @@ You are an expert in emergency planning. Summarize the following disaster manage
 Text:
 {chunk}
 """
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3,
@@ -69,10 +77,10 @@ if uploaded_pdf:
             summary = summarize_chunk(chunk)
             summaries.append(summary)
 
-    # Final summary
+    # Final summary prompt
     final_prompt = "Combine and condense the following summaries into a cohesive executive summary of the disaster plan:\n\n" + "\n\n".join(summaries)
 
-    final_response = openai.ChatCompletion.create(
+    final_response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": final_prompt}],
         temperature=0.2,
@@ -82,4 +90,4 @@ if uploaded_pdf:
     st.subheader("📝 Final Summary")
     st.write(final_summary)
 
-    st.download_button("📥 Download Summary", final_summary, file_name="disaster_plan_summary.txt")
+    st.download_button("Download Summary", final_summary, file_name="summary.txt")
