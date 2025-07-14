@@ -21,7 +21,7 @@ import tiktoken
 # Set your OpenAI API key here or in environment variables
 openai.api_key = "ETteF1ZBx3xMaD0aE5zkJQTWEMiXH6bWK9HohX0z7Qmf9fqFRNgZJQQJ99BDACHYHv6XJ3w3AAAAACOGvgwJ"
 
-st.title("📄 Disaster Management Plan PDF Summarizer")
+st.title("📄 Disaster Management Plan Summarizer")
 
 # ---------- Utilities ----------
 
@@ -60,7 +60,7 @@ Text:
 {chunk}
 """
     response = openai.ChatCompletion.create(
-        model="gpt-4-1106-preview",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3,
     )
