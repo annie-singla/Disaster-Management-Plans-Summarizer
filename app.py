@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/10akrDHvjEnG-CoDiG9mZGim-EntZwttb
 """
 
-pip install streamlit fitz openai tiktoken
 
 # requirements.txt
 # streamlit
