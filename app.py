@@ -4,7 +4,7 @@ import tiktoken
 from openai import OpenAI
 
 # --- Setup your API Key securely ---
-api_key = st.secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in st.secrets else "your_openai_key_here"
+api_key = st.secrets["ETteF1ZBx3xMaD0aE5zkJQTWEMiXH6bWK9HohX0z7Qmf9fqFRNgZJQQJ99BDACHYHv6XJ3w3AAAAACOGvgwJ"] if "OPENAI_API_KEY" in st.secrets else "ETteF1ZBx3xMaD0aE5zkJQTWEMiXH6bWK9HohX0z7Qmf9fqFRNgZJQQJ99BDACHYHv6XJ3w3AAAAACOGvgwJ"
 client = OpenAI(api_key=api_key)
 
 # --- Streamlit UI ---
